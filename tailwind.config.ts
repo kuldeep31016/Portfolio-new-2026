@@ -58,10 +58,6 @@ const config: Config = {
           "0%, 50%": { opacity: "1" },
           "50.01%, 100%": { opacity: "0" },
         },
-        drift: {
-          "0%, 100%": { transform: "translateY(0) rotate(var(--r,0deg))" },
-          "50%": { transform: "translateY(-16px) rotate(var(--r,0deg))" },
-        },
         scrolldot: {
           "0%": { transform: "translateY(0)", opacity: "0" },
           "30%": { opacity: "1" },
@@ -70,7 +66,6 @@ const config: Config = {
       },
       animation: {
         blink: "blink 1.05s step-end infinite",
-        drift: "drift 9s ease-in-out infinite",
         scrolldot: "scrolldot 1.9s ease-in-out infinite",
       },
     },
