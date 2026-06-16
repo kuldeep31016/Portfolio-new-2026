@@ -31,3 +31,5 @@ next-env.d.ts
 .vscode/*
 !.vscode/extensions.json
 .idea
+public/images/kuldeep-cutout.png
+public/images/kuldeep.jpg
