@@ -8,6 +8,7 @@ import {
   ThemeProvider,
   themeInitScript,
 } from "@/components/providers/theme-provider";
+import { ToastProvider } from "@/components/ui/toast";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -87,7 +88,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
