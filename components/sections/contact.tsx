@@ -13,6 +13,7 @@ import {
   MailIcon,
   PhoneIcon,
 } from "@/components/icons";
+import { useToast } from "@/components/ui/toast";
 
 const channelIcon: Record<ContactChannel["icon"], typeof MailIcon> = {
   email: MailIcon,
@@ -26,11 +27,11 @@ const fieldClass =
 
 const labelClass = "mb-2 block text-[13px] text-muted";
 
-type Status = "idle" | "sending" | "sent" | "error";
+type Status = "idle" | "sending";
 
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState("");
+  const { toast } = useToast();
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,7 +46,6 @@ export function Contact() {
     };
 
     setStatus("sending");
-    setError("");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -59,10 +59,19 @@ export function Contact() {
         throw new Error(body?.error || "Something went wrong.");
       }
       form.reset();
-      setStatus("sent");
+      toast(
+        "Thanks — your message is on its way. I'll get back to you soon.",
+        "success",
+      );
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong.");
-      setStatus("error");
+      toast(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please email me directly.",
+        "error",
+      );
+    } finally {
+      setStatus("idle");
     }
   };
 
@@ -87,23 +96,6 @@ export function Contact() {
             <div className="text-[13px] font-semibold uppercase tracking-[0.16em] text-text">
               Send a Message
             </div>
-            {status === "sent" && (
-              <div
-                role="status"
-                className="mt-[18px] rounded border border-accent bg-surface px-4 py-3.5 text-sm text-accent-strong"
-              >
-                Thanks — your message is on its way. I&apos;ll get back to you
-                soon.
-              </div>
-            )}
-            {status === "error" && (
-              <div
-                role="alert"
-                className="mt-[18px] rounded border border-red-400/60 bg-surface px-4 py-3.5 text-sm text-red-700 dark:text-red-300"
-              >
-                {error}
-              </div>
-            )}
             <form
               onSubmit={onSubmit}
               className="relative mt-[22px] flex flex-col gap-[18px]"
