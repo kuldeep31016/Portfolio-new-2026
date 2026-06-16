@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
 import { DownloadIcon, EyeIcon } from "@/components/icons";
 import { Typewriter } from "@/components/sections/typewriter";
+import { HeroParticles } from "@/components/sections/hero-particles";
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -25,15 +26,8 @@ export function Hero() {
       id="top"
       className="relative flex min-h-[calc(100svh-74px)] flex-col overflow-hidden scroll-mt-[84px]"
     >
-      {/* Floating decorative shapes */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <span className="absolute left-[8%] top-[16%] h-[120px] w-[120px] animate-drift rounded-full border-[1.5px] border-accent/20" />
-        <span className="absolute right-[11%] top-[24%] h-[90px] w-[90px] animate-drift rounded-full border-[1.5px] border-muted/20 [--r:18deg] [transform:rotate(18deg)]" />
-        <span className="absolute bottom-[20%] left-[14%] h-[74px] w-[74px] animate-drift rounded-full border-[1.5px] border-muted/20 [--r:-12deg] [transform:rotate(-12deg)]" />
-        <span className="absolute bottom-[26%] right-[16%] h-0 w-0 border-x-[42px] border-b-[72px] border-x-transparent border-b-accent/10" />
-        <span className="absolute left-[5%] top-[54%] h-0 w-0 border-x-[34px] border-b-[58px] border-x-transparent border-b-muted/10 [transform:rotate(20deg)]" />
-        <span className="absolute right-[30%] top-[12%] h-[46px] w-[46px] rounded-full border-[1.5px] border-muted/20" />
-      </div>
+      {/* Animated constellation background */}
+      <HeroParticles />
 
       <div className="relative mx-auto flex w-full max-w-[1200px] flex-1 flex-wrap items-center gap-[clamp(28px,4vw,64px)] px-[clamp(20px,5vw,48px)] py-[clamp(24px,4vw,48px)]">
         {/* Left column */}
