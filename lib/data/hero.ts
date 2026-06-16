@@ -16,5 +16,5 @@ export const aboutParagraphs: string[] = [
 export const aboutStats: HeroStat[] = [
   { value: "9.5", label: "CGPA" },
   { value: "200+", label: "LeetCode Solved" },
-  { value: "3", label: "Internships" },
+  { value: "4", label: "Internships" },
 ];
