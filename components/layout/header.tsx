@@ -8,7 +8,7 @@ import { useTheme } from "@/components/providers/theme-provider";
 import { Button } from "@/components/ui/button";
 import {
   CloseIcon,
-  DownloadIcon,
+  LinktreeIcon,
   MenuIcon,
   MoonIcon,
   SunIcon,
@@ -73,9 +73,13 @@ export function Header() {
             size="sm"
             className="ml-[14px] tracking-[0.14em]"
           >
-            <a href={site.resumePath} download>
-              <DownloadIcon size={14} />
-              Résumé
+            <a
+              href={site.linktree}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinktreeIcon size={14} />
+              Linktree
             </a>
           </Button>
           <span className="ml-2.5">
@@ -114,12 +118,14 @@ export function Header() {
             </Link>
           ))}
           <a
-            href={site.resumePath}
-            download
+            href={site.linktree}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={closeMenu}
             className="mt-4 flex items-center justify-center gap-2 bg-espresso p-[14px] text-xs font-semibold uppercase tracking-[0.14em] text-cream"
           >
-            Download Résumé
+            <LinktreeIcon size={15} />
+            Linktree
           </a>
         </div>
       )}

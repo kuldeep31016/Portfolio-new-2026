@@ -14,6 +14,7 @@ export const site = {
   github: "https://github.com/kuldeep31016",
   githubHandle: "github.com/kuldeep31016",
   linkedin: "https://www.linkedin.com",
+  linktree: "https://linktr.ee/iamkuldeepraj55",
   resumePath: "/Kuldeep_Raj_Resume.pdf",
   accent: "#9A6B3C",
 } as const;
