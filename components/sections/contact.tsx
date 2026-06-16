@@ -26,13 +26,44 @@ const fieldClass =
 
 const labelClass = "mb-2 block text-[13px] text-muted";
 
-export function Contact() {
-  const [sent, setSent] = useState(false);
+type Status = "idle" | "sending" | "sent" | "error";
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+export function Contact() {
+  const [status, setStatus] = useState<Status>("idle");
+  const [error, setError] = useState("");
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSent(true);
-    event.currentTarget.reset();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const payload = {
+      name: String(data.get("name") ?? ""),
+      email: String(data.get("email") ?? ""),
+      subject: String(data.get("subject") ?? ""),
+      message: String(data.get("message") ?? ""),
+      company: String(data.get("company") ?? ""),
+    };
+
+    setStatus("sending");
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const body = (await res.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        throw new Error(body?.error || "Something went wrong.");
+      }
+      form.reset();
+      setStatus("sent");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+      setStatus("error");
+    }
   };
 
   return (
@@ -56,16 +87,41 @@ export function Contact() {
             <div className="text-[13px] font-semibold uppercase tracking-[0.16em] text-text">
               Send a Message
             </div>
-            {sent && (
+            {status === "sent" && (
               <div
                 role="status"
                 className="mt-[18px] rounded border border-accent bg-surface px-4 py-3.5 text-sm text-accent-strong"
               >
-                Thanks — your message has been noted. I&apos;ll get back to you
+                Thanks — your message is on its way. I&apos;ll get back to you
                 soon.
               </div>
             )}
-            <form onSubmit={onSubmit} className="mt-[22px] flex flex-col gap-[18px]">
+            {status === "error" && (
+              <div
+                role="alert"
+                className="mt-[18px] rounded border border-red-400/60 bg-surface px-4 py-3.5 text-sm text-red-700 dark:text-red-300"
+              >
+                {error}
+              </div>
+            )}
+            <form
+              onSubmit={onSubmit}
+              className="relative mt-[22px] flex flex-col gap-[18px]"
+            >
+              {/* Honeypot — hidden from people, catches bots */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden"
+              >
+                <label htmlFor="contact-company">Company</label>
+                <input
+                  id="contact-company"
+                  name="company"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-[18px]">
                 <div>
                   <label htmlFor="contact-name" className={labelClass}>
@@ -121,8 +177,14 @@ export function Contact() {
                   className={`${fieldClass} resize-y`}
                 />
               </div>
-              <Button type="submit" variant="submit" size="block" className="mt-1">
-                Send Message
+              <Button
+                type="submit"
+                variant="submit"
+                size="block"
+                className="mt-1"
+                disabled={status === "sending"}
+              >
+                {status === "sending" ? "Sending…" : "Send Message"}
               </Button>
             </form>
           </Reveal>
