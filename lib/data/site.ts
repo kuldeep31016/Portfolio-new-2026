@@ -13,7 +13,7 @@ export const site = {
   phoneHref: "tel:+919508874235",
   github: "https://github.com/kuldeep31016",
   githubHandle: "github.com/kuldeep31016",
-  linkedin: "https://www.linkedin.com",
+  linkedin: "https://www.linkedin.com/in/imkuldeepraj06/",
   linktree: "https://linktr.ee/iamkuldeepraj55",
   resumePath: "/Kuldeep_Raj_Resume.pdf",
   accent: "#9A6B3C",
