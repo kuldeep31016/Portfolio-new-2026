@@ -2,7 +2,7 @@ import type { ExperienceItem } from "./types";
 
 export const experience: ExperienceItem[] = [
   {
-    period: "Nov 2025 — Mar 2026",
+    period: "Nov 2025 — Present",
     role: "Full-Stack Developer",
     company: "MyDukan",
     type: "Internship",
@@ -13,14 +13,14 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    period: "Oct 2025 — Jan 2026",
+    period: "Mar 2026 — May 2026",
     role: "Full-Stack Developer",
-    company: "Vrittify AI",
+    company: "Studio ILIOS",
     type: "Internship",
-    commitment: "Part-time",
+    commitment: "Full-time",
     points: [
-      "Developed scalable modules using React.js, Express, and MongoDB in a team of 5+, contributing to a 30% improvement in feature delivery speed.",
-      "Designed and deployed RESTful APIs for production use, ensuring reliability and maintainability across distributed services.",
+      'Built HealthHub on the Next Life platform — a PDF-to-AI pipeline that extracts medical reports and uses Claude/Gemini to classify them into fixed health categories with clear "no data" states.',
+      "Added an async background-job worker for AI processing, table-based CategoryHubs with versioning and frontend caching, and a separate dated section for billing files.",
     ],
   },
   {
@@ -34,4 +34,16 @@ export const experience: ExperienceItem[] = [
       "Handled real-time data synchronization and improved overall system reliability under production load.",
     ],
   },
+  {
+    period: "Oct 2025 — Jan 2026",
+    role: "Full-Stack Developer",
+    company: "Vrittify AI",
+    type: "Internship",
+    commitment: "Part-time",
+    points: [
+      "Developed scalable modules using React.js, Express, and MongoDB in a team of 5+, contributing to a 30% improvement in feature delivery speed.",
+      "Designed and deployed RESTful APIs for production use, ensuring reliability and maintainability across distributed services.",
+    ],
+  },
+  
 ];
