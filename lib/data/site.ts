@@ -8,7 +8,7 @@ export const site = {
   description:
     "Third-year Computer Science engineer building production-grade SaaS platforms, REST APIs, and AI-powered applications across the full stack — React, FastAPI, PostgreSQL, Docker, and AWS.",
   url: "https://kuldeepraj.xyz",
-  email: "iamkuldeepraj55@gmail.com",
+  email: "iamkuldeepraj06@gmail.com",
   phone: "+91 95088 74235",
   phoneHref: "tel:+919508874235",
   github: "https://github.com/kuldeep31016",
